@@ -1,0 +1,136 @@
+<form
+  class="form-horizontal"
+  autocomplete="off"
+  #editProductForm="ngForm"
+  (ngSubmit)="save()"
+>
+  <abp-modal-header
+    [title]="'EditProduct' | localize"
+    (onCloseClick)="bsModalRef.hide()"
+  ></abp-modal-header>
+  <div class="modal-body">
+    <div class="form-group row required">
+      <label class="col-md-3 col-form-label" for="productName">
+        {{ "ProductName" | localize }}
+      </label>
+      <div class="col-md-9">
+        <input
+          type="text"
+          class="form-control"
+          name="productName"
+          id="productName"
+          [(ngModel)]="product.productName"
+          required
+          minlength="2"
+          maxlength="32"
+          #productNameModel="ngModel"
+          #productNameEl
+        />
+        <abp-validation-summary
+          [control]="productNameModel"
+          [controlEl]="productNameEl"
+        ></abp-validation-summary>
+      </div>
+      <label class="col-md-3 col-form-label" for="categoryName">
+        {{ "CategoryName" | localize }}
+      </label>
+      <div class="col-md-9">
+        <select
+          class="form-control"
+          aria-label="Default select example"
+          [(ngModel)]="product.categoryId"
+          name="categoryId"
+          id="categoryId"
+          required
+          #categoryNameModel="ngModel"
+          #categoryNameEl
+        >
+          <option value="" disabled selected>
+            {{ "ChooseCategory" | localize }}
+          </option>
+          <option *ngFor="let category of categories" [ngValue]="category.id">
+            {{ category.categoryName }}
+          </option>
+        </select>
+        <abp-validation-summary
+          [control]="categoryNameModel"
+          [controlEl]="categoryNameEl"
+        ></abp-validation-summary>
+        <!-- <input
+              type="number"
+              class="form-control"
+              name="categoryId"
+              id="categoryId"
+              [(ngModel)]="product.categoryId"
+              required
+              minlength="2"
+              maxlength="32"
+              #nameEl
+            /> -->
+      </div>
+      <label class="col-md-3 col-form-label" for="quantityPerUnit">
+        {{ "QuantityPerUnit" | localize }}
+      </label>
+      <div class="col-md-9">
+        <input
+          type="number"
+          class="form-control"
+          name="quantityPerUnit"
+          id="quantityPerUnit"
+          [(ngModel)]="product.quantityPerUnit"
+          required
+          #quantityPerUnitModel="ngModel"
+          #quantityPerUnitEl
+        />
+        <abp-validation-summary
+          [control]="quantityPerUnitModel"
+          [controlEl]="quantityPerUnitEl"
+        ></abp-validation-summary>
+      </div>
+
+      <label class="col-md-3 col-form-label" for="unitPrice">
+        {{ "UnitPrice" | localize }}
+      </label>
+      <div class="col-md-9">
+        <input
+          type="number"
+          class="form-control"
+          name="unitPrice"
+          id="unitPrice"
+          [(ngModel)]="product.unitPrice"
+          required
+          #unitPriceModel="ngModel"
+          #unitPriceEl
+        />
+        <abp-validation-summary
+          [control]="unitPriceModel"
+          [controlEl]="unitPriceEl"
+        ></abp-validation-summary>
+      </div>
+      <label class="col-md-3 col-form-label" for="unitsInStock">
+        {{ "UnitsInStock" | localize }}
+      </label>
+      <div class="col-md-9">
+        <input
+          type="number"
+          class="form-control"
+          name="unitsInStock"
+          id="unitsInStock"
+          [(ngModel)]="product.unitsInStock"
+          required
+          #unitsInStockModel="ngModel"
+          #unitsInStockEl
+        />
+        <abp-validation-summary
+          [control]="unitsInStockModel"
+          [controlEl]="unitsInStockEl"
+        ></abp-validation-summary>
+      </div>
+    </div>
+  </div>
+  <abp-modal-footer
+    [cancelDisabled]="saving"
+    [saveDisabled]="!editProductForm.form.valid || saving"
+    (onCancelClick)="bsModalRef.hide()"
+  ></abp-modal-footer>
+</form>
