@@ -40,7 +40,9 @@ export class ProductsComponent extends PagedListingComponentBase<ProductDto> {
       (result: boolean) => {
         if (result) {
           this._productService.delete(product.id).subscribe(
-            () => {},
+            () => {
+              this.list();
+            },
             (responseError) => {
               abp.message.error(
                 responseError.error.error.message,

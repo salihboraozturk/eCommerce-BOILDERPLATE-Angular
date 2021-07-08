@@ -39,7 +39,9 @@ export class CategoriesComponent extends PagedListingComponentBase<CategoryDto> 
       (result: boolean) => {
         if (result) {
           this._categoryService.delete(category.id).subscribe(
-            (result) => {},
+            (result) => {
+              this.list();
+            },
             (responseError) => {
               abp.message.error(
                 responseError.error.error.message,
